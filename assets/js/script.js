@@ -1,7 +1,7 @@
 // Quiz Question array
 let questions = [
   {
-  question: "what is the correct file extension for Javascript files?",
+  question: "What is the correct file extension for Javascript files?",
   answer: ".js",
   options: [
     ".java",
@@ -41,7 +41,7 @@ let questions = [
   ]
 },
   {
-  question: "When an operator’s value is NULL, the typeof returned by the unary operator is?",
+  question: "When an operator's value is NULL, the typeof returned by the unary operator is?",
   answer: "Object",
   options: [
     "Boolean",
@@ -61,7 +61,7 @@ let questions = [
   ]
 },
 {
-  question: "What does the ‘toLocateString()’ method do in JS?",
+  question: "What does the 'toLocateString()' method do in JS?",
   answer: "Returns a localized string representation of an object.",
   options: [
     "Returns a localised object representation.",
@@ -82,7 +82,6 @@ let questions = [
 },
 ];
 
-
 //selecting all required elements
 const startQuiz = document.getElementById("start-btn");
 const restart_quiz = document.getElementById("restart-btn");
@@ -91,12 +90,10 @@ const questionContainer = document.getElementById("question-container");
 const quizResults = document.getElementById("quiz-results");
 const questionList = document.querySelector(".question-list");
 
-
 let timeValue =  100;
 let questionCount = 0;
 let quizScore = 0;
 let counter;
-
 
 // if continueQuiz button clicked
 startQuiz.addEventListener('click', function() {
@@ -105,7 +102,6 @@ startQuiz.addEventListener('click', function() {
   showQuestions(0); //calling showQuestions function
   countDown(timeValue); //calling startTimer function
 })
-
 
 restart_quiz.addEventListener('click', function() {
   redirect("./index.html");
@@ -118,7 +114,6 @@ restart_quiz.addEventListener('click', function() {
   clearInterval(counter); //clear counter
   countDown(timeValue); //calling startTimer function
 })
-
 
 function nextQuestion() {
   if(questionCount < questions.length - 1){ //if question count is less than total question length
@@ -162,8 +157,10 @@ function answerSelected(answer){
       console.log("Correct!"); //Console for testing 
   } else{
        console.log("Incorrect!"); //Console for testing 
+       timeValue = timeValue-10;
        answerResult.textContent = "Incorrect!"; //displays users choise is incorrect
   }
+
   //Waits .8 of a second before removing answer result and then displaying next question
   setTimeout(function() {
       answerResult.textContent = ""; 
@@ -181,38 +178,19 @@ function showResult(){
   finalScore.textContent = quizScore;
 }
 
-// function startTimer(time){
-//   counter = setInterval(timer, 1000);
-//   function timer(){
-//       timeCount.textContent = time; //changing the value of timeCount with time value
-//       time--; //decrement the time value
-//       if(time < 0){ //if timer is less than 0
-//           clearInterval(counter); //clear counter
-//           console.log("time UP");
-//           showResult()
-      
-//       }
-//   }
-// }
-
 //Count down function
-function countDown(t) {
-  var sec = t;
+function countDown() {
   function startTimer(){
       console.log('timer suppose to go')
       var timer = setInterval(function(){
-          sec--;
-          document.getElementById('countDown').innerHTML=sec;
-          if (sec < 0) {
+          timeValue--;
+          document.getElementById('countDown').innerHTML=timeValue;
+          if (timeValue < 0) {
               clearInterval(timer);
               showResult()
           }
       }, 1000);
   }
-  // document.getElementById('incorrect').addEventListener("", function() {
-  //     sec -= 5;
-  //     document.getElementById('countDown').innerHTML='00:'+sec;
-  // });
   startTimer();
 };
 
@@ -221,6 +199,7 @@ var saveButton = document.getElementById("save");
 var playerName = document.querySelector("#playerName");
 var todoForm = document.querySelector("#highscore-form");
 var highscoreList = document.querySelector("#highscore-list");
+
 var highScores = [];
 var playerName;
 var highscoreResults = {};
@@ -231,11 +210,12 @@ function renderHighScores() {
    // Clear highscoreList element and update highscoresCountSpan
   highscoreList.innerHTML = "";
    // Render a new li for each todo
+  console.log(highScores);
   for (var i = 0; i < highScores.length; i++) {
     var highScore = highScores[i];
 
     var li = document.createElement("li");
-    li.textContent = highScore;
+    li.textContent = "Player: " + highScore.Player + ", Score: " + highScore.Score;
     li.setAttribute("data-index", i);
     highscoreList.appendChild(li);
   }
@@ -261,7 +241,9 @@ function storeHighScores() {
     Player: playerNameText,
     Score: quizScore
   };
+  console.log(highscoreResults)
   // Adds new quiz results to quiz list array
+  highscoreLists = JSON.parse(localStorage.getItem("highscoreList"));
   highscoreLists.push(highscoreResults);
    //Saves highscore list to local storage
   localStorage.setItem("highscoreList", JSON.stringify(highscoreLists));
@@ -269,9 +251,9 @@ function storeHighScores() {
 
 //Function to navigate between pages
 function redirect(page)
-{
+  {
     window.location.href=(page);
-}
+  }
 
 //Save button function to store user details to local storage 
 saveButton.addEventListener("click", function(event) {
@@ -280,7 +262,5 @@ saveButton.addEventListener("click", function(event) {
   redirect("./highscore.html");
   });
 
-
-// Calls init to retrieve data and render it to the page on load
+// Calls init to retrieve data and renders it to the page on load
 init()
-
