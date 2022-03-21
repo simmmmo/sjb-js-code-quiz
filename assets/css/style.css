@@ -34,7 +34,7 @@ h2 {
 
 
 h3 {
-    font-size: 2.4em;
+    font-size: 2.2em;
     line-height: 1.1em;
     margin: 0px;
     margin-top: 0.45em;
@@ -170,6 +170,22 @@ button:hover {
 .question-list .option:hover {
   cursor: pointer;
   background-color: #533685;
+}
+
+#highscore-list {
+  padding-bottom: 15px;
+}
+
+#highscore-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  box-sizing: border-box;
+  font-size: 1.1em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #533685;
 }
 
 .hide {

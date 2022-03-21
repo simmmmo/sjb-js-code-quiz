@@ -89,7 +89,6 @@ const quizIntro = document.getElementById("quiz-intro");
 const questionContainer = document.getElementById("question-container");
 const quizResults = document.getElementById("quiz-results");
 const questionList = document.querySelector(".question-list");
-
 let timeValue =  100;
 let questionCount = 0;
 let quizScore = 0;
@@ -160,7 +159,6 @@ function answerSelected(answer){
        timeValue = timeValue-10;
        answerResult.textContent = "Incorrect!"; //displays users choise is incorrect
   }
-
   //Waits .8 of a second before removing answer result and then displaying next question
   setTimeout(function() {
       answerResult.textContent = ""; 
@@ -199,12 +197,10 @@ var saveButton = document.getElementById("save");
 var playerName = document.querySelector("#playerName");
 var todoForm = document.querySelector("#highscore-form");
 var highscoreList = document.querySelector("#highscore-list");
-
 var highScores = [];
 var playerName;
 var highscoreResults = {};
 var highscoreLists = [];
-
 // The following function renders items in a todo list as <li> elements
 function renderHighScores() {
    // Clear highscoreList element and update highscoresCountSpan
@@ -213,7 +209,6 @@ function renderHighScores() {
   console.log(highScores);
   for (var i = 0; i < highScores.length; i++) {
     var highScore = highScores[i];
-
     var li = document.createElement("li");
     li.textContent = "Player: " + highScore.Player + ", Score: " + highScore.Score;
     li.setAttribute("data-index", i);
@@ -226,8 +221,10 @@ function init() {
   // Get stored todos from localStorage
   var storedHighScores = JSON.parse(localStorage.getItem("highscoreList"));
   // If todos were retrieved from localStorage, update the todos array to it
-  if (storedHighScores !== null) {
-    highScores = storedHighScores;
+   if (JSON.parse(localStorage.getItem("highscoreList")) !== null) {
+    highScores = JSON.parse(localStorage.getItem("highscoreList"));
+  } else {
+    localStorage.setItem("highscoreList", JSON.stringify([]));
   }
   // This is a helper function that will render todos to the DOM
   renderHighScores();
@@ -241,6 +238,7 @@ function storeHighScores() {
     Player: playerNameText,
     Score: quizScore
   };
+
   console.log(highscoreResults)
   // Adds new quiz results to quiz list array
   highscoreLists = JSON.parse(localStorage.getItem("highscoreList"));
@@ -261,6 +259,6 @@ saveButton.addEventListener("click", function(event) {
   storeHighScores();
   redirect("./highscore.html");
   });
-
+  
 // Calls init to retrieve data and renders it to the page on load
 init()
