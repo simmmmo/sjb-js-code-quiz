@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+      <!-- Header -->
+    <header class="main-header">
+      <div class="container">
+        <nav class="main-nav">
+          <a href="./highscore.html">View Highscores</a>
+        </nav>
+        <div class="timer">
+          <h1>Time: </h1>
+          <div id="countDown">100</div>
+        </div>
+      </div>
+    </header> 
+    <main>
+      <div class="container">
+        <div class="quiz-wrapper">
+           <!-- Quiz Intro Section -->
+          <div id="quiz-intro">
+            <h2>Coding Quiz Challenge</h2>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalise tour score time by ten seconds.</p>
+            <button id="start-btn">Start Quiz</button>
+          </div>
+           <!-- Quiz Question Section -->
+          <div id="question-container" class="hide">
+              <!-- Quiz Questions  -->
+              <h3 id="question-title"></h3>
+               <!-- Quiz Answer Options  -->
+              <div class="question-list">
+              </div>
+               <!-- Question Result  -->
+              <h4 id="answerResult"></h4>
+          </div>
+           <!-- Quiz Results Section -->
+          <div id="quiz-results" class="hide">
+              <h3>All done</h3>
+              <p>Your final score is <span id="final-score">100</span></p>
+              <form id="highscore-form" method="POST">
+                <label for="msg">Enter your initials</label>
+                <input type="text" placeholder="" name="playerName" id="playerName" />
+                <button id="save">Submit</button>
+              </form>
+              <!-- Quiz High Score List for testing DELETE -->
+              <ul id="highscore-list"></ul>
+              <button id="start-btn" class="hide">Start Quiz</button>
+              <button id="restart-btn" class="hide"> Replay Quiz</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
